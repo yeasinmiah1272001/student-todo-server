@@ -25,6 +25,23 @@ const addTodo = async (req, res) => {
   }
 };
 
+const deleteTodo = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const query = { _id: id };
+    const result = await todomodel.deleteOne(query);
+    if (result.deletedCount === 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Todo not found" });
+    }
+    res.json({ success: true, message: "Todo deleted successfully" });
+  } catch (error) {
+    console.log("delete todo error", error);
+    res.json({ success: false, message: "delete todo error" });
+  }
+};
+
 const getTodo = async (req, res) => {
   try {
     const total = await todomodel.countDocuments({});
@@ -41,4 +58,4 @@ const getTodo = async (req, res) => {
   }
 };
 
-export { addTodo, getTodo };
+export { addTodo, getTodo, deleteTodo };

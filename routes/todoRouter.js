@@ -1,10 +1,10 @@
 import express from "express";
-import { addTodo, getTodo } from "../controllers/todoController.js";
+import { addTodo, deleteTodo, getTodo } from "../controllers/todoController.js";
 
 const todoRouter = express.Router();
 
 todoRouter.post("/addTodo", addTodo);
-// todoRouter.delete("/deleteTodo/:id");
+todoRouter.delete("/deleteTodo/:id", deleteTodo);
 // todoRouter.put("/updateTodo/:id");
 todoRouter.get("/allTodo", getTodo);
 
